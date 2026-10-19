@@ -15,7 +15,7 @@ def orders_list(request):
 
 @login_required
 def order_detail(request, order_id):
-    order = Order.objects.get(id=order_id)
+    order = Order.objects.get(id=order_id, user=request.user)
     context = {
         'order': order
     }
