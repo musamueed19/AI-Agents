@@ -1,7 +1,10 @@
 from django.shortcuts import render
 from .models import Order, Product, RefundRequest
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
+
+@login_required
 def orders_list(request):
     orders = Order.objects.filter(user=request.user).order_by('-created_at')
     context = {
@@ -9,3 +12,12 @@ def orders_list(request):
     }
 
     return render(request, 'orders/orders_list.html', context)
+
+@login_required
+def order_detail(request, order_id):
+    order = Order.objects.get(id=order_id)
+    context = {
+        'order': order
+    }
+
+    return render(request, 'orders/order_detail.html', context)

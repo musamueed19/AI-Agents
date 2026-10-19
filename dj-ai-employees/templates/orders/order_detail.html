@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Detail</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #f0f4f8;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .content-container {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            max-width: 1200px;
+            min-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .content-title {
+            font-size: 22px;
+            font-weight: 500;
+            color: #1a1a2e;
+        }
+
+        .navbar {
+            background-color: #1a1a2e;
+            padding: 14px 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .navbar-brand {
+            color: #fff;
+            font-size: 20px;
+            font-weight: 700;
+        }
+
+        .navbar-text {
+            color: #fff;
+            font-size: 15px;
+            font-weight: 500;
+        }
+
+        .navbar-right {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logout-btn {
+            background-color: #a90011;
+            color: #fff;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .logout-btn:hover {
+            background-color: #c82333;
+        }
+
+        .content-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .orders-list {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .order-card {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+        }
+        .content-header-left {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .back-orders-list-btn {
+            font-size: 14px;
+            color: #666;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .order-left {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .order-product {
+            font-size: 18px;
+            font-weight: 500;
+        }
+
+        .order-meta {
+            font-size: 14px;
+            color: #666;
+        }
+
+        .order-right {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .order-price {
+            font-size: 18px;
+            font-weight: 500;
+        }
+
+        .order-status {
+            font-size: 14px;
+            color: #666;
+        }
+
+        .order-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .order-action-btn {
+            background-color: #1a1a2e;
+            color: #fff;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .order-action-btn:hover {
+            background-color: #333;
+        }
+
+        .order-action-btn:active {
+            transform: scale(0.98);
+        }
+
+        .order-action-btn:focus {
+            outline: none;
+        }
+
+        .order-action-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .order-action-btn:disabled:hover {
+            background-color: #1a1a2e;
+        }
+
+        .order-action-btn:disabled:active {
+            transform: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <!-- Navbar -->
+        <nav class="navbar">
+            <div class="navbar-brand navbar-left">CoolBreeze AC</div>
+            <div class="navbar-right">
+                <span class="navbar-text">Welcome, {{request.user.first_name}}</span>
+                <!-- Logout button -->
+                <form method="post" action="{% url 'logout' %}">
+                    {% csrf_token %}
+                    <button type="submit" class="logout-btn">Logout</button>
+                </form>
+            </div>
+
+        </nav>
+
+        <!-- Orders List -->
+        <div class="content-container">
+            <div class="content-header">
+                <div class="content-header-left">
+                    <!-- Back Orders List Button -->
+                    <a href="{% url 'orders_list' %}" class="back-orders-list-btn">&larr; Back to Orders List</a>
+                    <h1 class="content-title">Order #{{order.id}}</h1>
+                </div>
+            </div>
+
+            <div class="order-container">
+                <div class="order-left">
+                    <div class="order-product">
+                        {{order.product_name}}
+                    </div>
+                    <div class="order-meta">
+                        {{order.created_at|date:"d M Y"}}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
