@@ -6,7 +6,7 @@ sub_domain = "https://books." + main_url
 
 response = requests.get(sub_domain)
 
-print(response.status_code)
+# print(response.status_code)
 
 page_html = response.text
 
