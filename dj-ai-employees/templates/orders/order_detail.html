@@ -220,6 +220,22 @@
                         {{order.created_at|date:"d M Y"}}
                     </div>
                 </div>
+                <!-- Refund Requests -->
+                <div class="refund-requests-container">
+                    <h2 class="refund-requests-title">Refund Requests</h2>
+                    <div class="refund-requests-list">
+                        {% for refund_request in refund_requests %}
+                        <div class="refund-request-card">
+                            <div class="refund-request-product">
+                                {{refund_request.reason}}
+                            </div>
+                            <div class="refund-request-meta">
+                                {{refund_request.created_at|date:"d M Y"}}
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
             </div>
         </div>
     </div>

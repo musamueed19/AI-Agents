@@ -16,8 +16,12 @@ def orders_list(request):
 @login_required
 def order_detail(request, order_id):
     order = Order.objects.get(id=order_id, user=request.user)
+
+    # get refund requests history for the order
+    refund_requests = RefundRequest.objects.filter(order=order).order_by('-created_at')
     context = {
-        'order': order
+        'order': order,
+        'refund_requests': refund_requests
     }
 
     return render(request, 'orders/order_detail.html', context)
